@@ -1,0 +1,355 @@
+openapi: 3.0.0
+info:
+  title: Credit Conveyor
+  version: 0.0.1
+servers:
+- description: Gateway service
+  url: http://127.0.0.1:8084/
+paths:
+  /application:
+    post:
+      operationId: createApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanApplicationRequestDTO'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LoanOfferDTO'
+                type: array
+          description: list of loans received
+      summary: Create loan application
+      tags:
+      - application
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: application
+  /application/apply:
+    post:
+      operationId: applyLoanOffer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanOfferDTO'
+        required: true
+      responses:
+        "200":
+          description: Loan offer selected
+      summary: Choose a loan offer
+      tags:
+      - application
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: application
+  /application/registration/{applicationId}:
+    post:
+      operationId: finishRegistration
+      parameters:
+      - description: Id of the loan application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          example: 115
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinishRegistrationRequestDto'
+        required: true
+      responses:
+        "200":
+          description: "Scoring passed, application registered"
+      summary: Finish registration and loan calculation
+      tags:
+      - application
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: application
+  /document/{applicationId}:
+    post:
+      operationId: requestDocuments
+      parameters:
+      - description: Id of the loan application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          example: 115
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: Loan documents was creation
+      summary: Request the creation of loan documents
+      tags:
+      - document
+      x-accepts: application/json
+      x-tags:
+      - tag: document
+  /document/{applicationId}/sign:
+    post:
+      operationId: requestSesCode
+      parameters:
+      - description: Id of the loan application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          example: 115
+          type: integer
+          format: int64
+        style: simple
+      responses:
+        "200":
+          description: Ses code sent to your email
+      summary: Request ses-code
+      tags:
+      - document
+      x-accepts: application/json
+      x-tags:
+      - tag: document
+  /document/{applicationId}/sign/{sesCode}:
+    post:
+      operationId: sendSesCode
+      parameters:
+      - description: Id of the loan application
+        explode: false
+        in: path
+        name: applicationId
+        required: true
+        schema:
+          example: 115
+          type: integer
+          format: int64
+        style: simple
+      - description: Ses-code from your email
+        explode: false
+        in: path
+        name: sesCode
+        required: true
+        schema:
+          example: "1256323.45466545"
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: loan issued!
+      summary: Send ses-code
+      tags:
+      - document
+      x-accepts: application/json
+      x-tags:
+      - tag: document
+components:
+  schemas:
+    LoanOfferDTO:
+      example:
+        totalAmount: 150000
+        isSalaryClient: true
+        monthlyPayment: 10000
+        rate: 14
+        term: 24
+        applicationId: 115
+        requestedAmount: 120000
+        isInsuranceEnabled: true
+      properties:
+        applicationId:
+          example: 115
+          format: int64
+          type: integer
+        requestedAmount:
+          example: 120000
+          type: number
+        totalAmount:
+          example: 150000
+          type: number
+        term:
+          example: 24
+          type: integer
+        monthlyPayment:
+          example: 10000
+          type: number
+        rate:
+          example: 14
+          type: number
+        isInsuranceEnabled:
+          example: true
+          type: boolean
+        isSalaryClient:
+          type: boolean
+      required:
+      - applicationId
+      - isInsuranceEnabled
+      - isSalaryClient
+      - monthlyPayment
+      - rate
+      - requestedAmount
+      - term
+      - totalAmount
+      type: object
+    LoanApplicationRequestDTO:
+      example:
+        passportNumber: "549875"
+        firstName: Svetlana
+        lastName: Ivanova
+        amount: 120000
+        birthdate: 1990-12-01
+        term: 24
+        middleName: Petrovna
+        passportSeries: "1265"
+        email: svetl@maill.ru
+      properties:
+        amount:
+          example: 120000
+          type: number
+        term:
+          example: 24
+          type: integer
+        firstName:
+          example: Svetlana
+          type: string
+        lastName:
+          example: Ivanova
+          type: string
+        middleName:
+          example: Petrovna
+          type: string
+        email:
+          example: svetl@maill.ru
+          type: string
+        birthdate:
+          example: 1990-12-01
+          format: 1990-12-01
+          type: string
+        passportSeries:
+          example: "1265"
+          type: string
+        passportNumber:
+          example: "549875"
+          type: string
+      required:
+      - amount
+      - birthdate
+      - email
+      - firstName
+      - lastName
+      - passportNumber
+      - passportSeries
+      - term
+      type: object
+    FinishRegistrationRequestDto:
+      example:
+        dependentAmount: 15489
+        gender: MALE
+        passportIssueBranch: GU MVD PO SARATOVSKOY OBLASTI
+        passportIssueDate: 2015-10-09
+        employment:
+          workExperienceCurrent: 12
+          position: WORKER
+          workExperienceTotal: 12
+          employmentStatus: EMPLOYED
+          salary: 80000
+          employerINN: "12569845645"
+        maritalStatus: MARRIED
+        account: 154799
+      properties:
+        gender:
+          enum:
+          - MALE
+          - FEMALE
+          - NON_BINARY
+          type: string
+        maritalStatus:
+          enum:
+          - MARRIED
+          - DIVORCED
+          - SINGLE
+          - WIDOW_WIDOWER
+          type: string
+        dependentAmount:
+          example: 15489
+          type: integer
+        passportIssueDate:
+          example: 2015-10-09
+          format: 2015-10-09
+          type: string
+        passportIssueBranch:
+          example: GU MVD PO SARATOVSKOY OBLASTI
+          type: string
+        employment:
+          $ref: '#/components/schemas/EmploymentDTO'
+        account:
+          example: 154799
+          type: integer
+      required:
+      - account
+      - dependentAmount
+      - employment
+      - gender
+      - maritalStatus
+      - passportIssueBranch
+      - passportIssueDate
+      type: object
+    EmploymentDTO:
+      example:
+        workExperienceCurrent: 12
+        position: WORKER
+        workExperienceTotal: 12
+        employmentStatus: EMPLOYED
+        salary: 80000
+        employerINN: "12569845645"
+      properties:
+        employmentStatus:
+          enum:
+          - UNEMPLOYED
+          - SELF_EMPLOYED
+          - EMPLOYED
+          - BUSINESS_OWNER
+          example: EMPLOYED
+          type: string
+        employerINN:
+          example: "12569845645"
+          type: string
+        salary:
+          example: 80000
+          type: number
+        position:
+          enum:
+          - WORKER
+          - MID_MANAGER
+          - TOP_MANAGER
+          - OWNER
+          example: WORKER
+          type: string
+        workExperienceTotal:
+          example: 12
+          type: integer
+        workExperienceCurrent:
+          example: 12
+          type: integer
+      required:
+      - employerINN
+      - employmentStatus
+      - position
+      - salary
+      - workExperienceCurrent
+      - workExperienceTotal
+      type: object
