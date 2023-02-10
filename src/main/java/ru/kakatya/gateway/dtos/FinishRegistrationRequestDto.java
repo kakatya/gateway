@@ -4,26 +4,20 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
-
-
-import javax.annotation.Generated;
 
 /**
  * FinishRegistrationRequestDto
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-02-09T14:10:33.221503700+04:00[GMT+04:00]")
-public class FinishRegistrationRequestDto {
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-02-10T14:45:24.698772300+04:00[Europe/Saratov]")
+public class FinishRegistrationRequestDto   {
   /**
    * Gets or Sets gender
    */
-  public enum Gender {
+  public enum GenderEnum {
     MALE("MALE"),
     
     FEMALE("FEMALE"),
@@ -32,7 +26,7 @@ public class FinishRegistrationRequestDto {
 
     private String value;
 
-    Gender(String value) {
+    GenderEnum(String value) {
       this.value = value;
     }
 
@@ -47,8 +41,8 @@ public class FinishRegistrationRequestDto {
     }
 
     @JsonCreator
-    public static Gender fromValue(String value) {
-      for (Gender b : Gender.values()) {
+    public static GenderEnum fromValue(String value) {
+      for (GenderEnum b : GenderEnum.values()) {
         if (b.value.equals(value)) {
           return b;
         }
@@ -58,12 +52,12 @@ public class FinishRegistrationRequestDto {
   }
 
   @JsonProperty("gender")
-  private Gender gender;
+  private GenderEnum gender;
 
   /**
    * Gets or Sets maritalStatus
    */
-  public enum MaritalStatus {
+  public enum MaritalStatusEnum {
     MARRIED("MARRIED"),
     
     DIVORCED("DIVORCED"),
@@ -74,7 +68,7 @@ public class FinishRegistrationRequestDto {
 
     private String value;
 
-    MaritalStatus(String value) {
+    MaritalStatusEnum(String value) {
       this.value = value;
     }
 
@@ -89,8 +83,8 @@ public class FinishRegistrationRequestDto {
     }
 
     @JsonCreator
-    public static MaritalStatus fromValue(String value) {
-      for (MaritalStatus b : MaritalStatus.values()) {
+    public static MaritalStatusEnum fromValue(String value) {
+      for (MaritalStatusEnum b : MaritalStatusEnum.values()) {
         if (b.value.equals(value)) {
           return b;
         }
@@ -100,7 +94,7 @@ public class FinishRegistrationRequestDto {
   }
 
   @JsonProperty("maritalStatus")
-  private MaritalStatus maritalStatus;
+  private MaritalStatusEnum maritalStatus;
 
   @JsonProperty("dependentAmount")
   private Integer dependentAmount;
@@ -117,7 +111,7 @@ public class FinishRegistrationRequestDto {
   @JsonProperty("account")
   private Integer account;
 
-  public FinishRegistrationRequestDto gender(Gender gender) {
+  public FinishRegistrationRequestDto gender(GenderEnum gender) {
     this.gender = gender;
     return this;
   }
@@ -126,17 +120,19 @@ public class FinishRegistrationRequestDto {
    * Get gender
    * @return gender
   */
-  @NotNull 
-  @Schema(name = "gender", requiredMode = Schema.RequiredMode.REQUIRED)
-  public FinishRegistrationRequestDto.Gender getGender() {
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+
+  public GenderEnum getGender() {
     return gender;
   }
 
-  public void setGender(Gender gender) {
+  public void setGender(GenderEnum gender) {
     this.gender = gender;
   }
 
-  public FinishRegistrationRequestDto maritalStatus(MaritalStatus maritalStatus) {
+  public FinishRegistrationRequestDto maritalStatus(MaritalStatusEnum maritalStatus) {
     this.maritalStatus = maritalStatus;
     return this;
   }
@@ -145,13 +141,15 @@ public class FinishRegistrationRequestDto {
    * Get maritalStatus
    * @return maritalStatus
   */
-  @NotNull 
-  @Schema(name = "maritalStatus", requiredMode = Schema.RequiredMode.REQUIRED)
-  public FinishRegistrationRequestDto.MaritalStatus getMaritalStatus() {
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+
+  public MaritalStatusEnum getMaritalStatus() {
     return maritalStatus;
   }
 
-  public void setMaritalStatus(MaritalStatus maritalStatus) {
+  public void setMaritalStatus(MaritalStatusEnum maritalStatus) {
     this.maritalStatus = maritalStatus;
   }
 
@@ -164,8 +162,10 @@ public class FinishRegistrationRequestDto {
    * Get dependentAmount
    * @return dependentAmount
   */
-  @NotNull 
-  @Schema(name = "dependentAmount", example = "15489", requiredMode = Schema.RequiredMode.REQUIRED)
+  @ApiModelProperty(example = "15489", required = true, value = "")
+  @NotNull
+
+
   public Integer getDependentAmount() {
     return dependentAmount;
   }
@@ -183,8 +183,10 @@ public class FinishRegistrationRequestDto {
    * Get passportIssueDate
    * @return passportIssueDate
   */
-  @NotNull 
-  @Schema(name = "passportIssueDate", example = "2015-10-09", requiredMode = Schema.RequiredMode.REQUIRED)
+  @ApiModelProperty(example = "2015-10-09", required = true, value = "")
+  @NotNull
+
+
   public String getPassportIssueDate() {
     return passportIssueDate;
   }
@@ -202,8 +204,10 @@ public class FinishRegistrationRequestDto {
    * Get passportIssueBranch
    * @return passportIssueBranch
   */
-  @NotNull 
-  @Schema(name = "passportIssueBranch", example = "GU MVD PO SARATOVSKOY OBLASTI", requiredMode = Schema.RequiredMode.REQUIRED)
+  @ApiModelProperty(example = "GU MVD PO SARATOVSKOY OBLASTI", required = true, value = "")
+  @NotNull
+
+
   public String getPassportIssueBranch() {
     return passportIssueBranch;
   }
@@ -221,8 +225,11 @@ public class FinishRegistrationRequestDto {
    * Get employment
    * @return employment
   */
-  @NotNull @Valid 
-  @Schema(name = "employment", requiredMode = Schema.RequiredMode.REQUIRED)
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+  @Valid
+
   public EmploymentDTO getEmployment() {
     return employment;
   }
@@ -240,8 +247,10 @@ public class FinishRegistrationRequestDto {
    * Get account
    * @return account
   */
-  @NotNull 
-  @Schema(name = "account", example = "154799", requiredMode = Schema.RequiredMode.REQUIRED)
+  @ApiModelProperty(example = "154799", required = true, value = "")
+  @NotNull
+
+
   public Integer getAccount() {
     return account;
   }
@@ -249,6 +258,7 @@ public class FinishRegistrationRequestDto {
   public void setAccount(Integer account) {
     this.account = account;
   }
+
 
   @Override
   public boolean equals(Object o) {
@@ -277,6 +287,7 @@ public class FinishRegistrationRequestDto {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class FinishRegistrationRequestDto {\n");
+    
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
     sb.append("    maritalStatus: ").append(toIndentedString(maritalStatus)).append("\n");
     sb.append("    dependentAmount: ").append(toIndentedString(dependentAmount)).append("\n");

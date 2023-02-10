@@ -4,26 +4,20 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
-
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
-
-
-import javax.annotation.Generated;
 
 /**
  * EmploymentDTO
  */
-
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-02-09T14:10:33.221503700+04:00[GMT+04:00]")
-public class EmploymentDTO {
-
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-02-10T14:45:24.698772300+04:00[Europe/Saratov]")
+public class EmploymentDTO   {
   /**
    * Gets or Sets employmentStatus
    */
-  public enum EmploymentStatus {
+  public enum EmploymentStatusEnum {
     UNEMPLOYED("UNEMPLOYED"),
     
     SELF_EMPLOYED("SELF_EMPLOYED"),
@@ -34,7 +28,7 @@ public class EmploymentDTO {
 
     private String value;
 
-    EmploymentStatus(String value) {
+    EmploymentStatusEnum(String value) {
       this.value = value;
     }
 
@@ -49,8 +43,8 @@ public class EmploymentDTO {
     }
 
     @JsonCreator
-    public static EmploymentStatus fromValue(String value) {
-      for (EmploymentStatus b : EmploymentStatus.values()) {
+    public static EmploymentStatusEnum fromValue(String value) {
+      for (EmploymentStatusEnum b : EmploymentStatusEnum.values()) {
         if (b.value.equals(value)) {
           return b;
         }
@@ -60,7 +54,7 @@ public class EmploymentDTO {
   }
 
   @JsonProperty("employmentStatus")
-  private EmploymentStatus employmentStatus;
+  private EmploymentStatusEnum employmentStatus;
 
   @JsonProperty("employerINN")
   private String employerINN;
@@ -71,7 +65,7 @@ public class EmploymentDTO {
   /**
    * Gets or Sets position
    */
-  public enum EmploymentPosition {
+  public enum PositionEnum {
     WORKER("WORKER"),
     
     MID_MANAGER("MID_MANAGER"),
@@ -82,7 +76,7 @@ public class EmploymentDTO {
 
     private String value;
 
-    EmploymentPosition(String value) {
+    PositionEnum(String value) {
       this.value = value;
     }
 
@@ -97,8 +91,8 @@ public class EmploymentDTO {
     }
 
     @JsonCreator
-    public static EmploymentPosition fromValue(String value) {
-      for (EmploymentPosition b : EmploymentPosition.values()) {
+    public static PositionEnum fromValue(String value) {
+      for (PositionEnum b : PositionEnum.values()) {
         if (b.value.equals(value)) {
           return b;
         }
@@ -108,7 +102,7 @@ public class EmploymentDTO {
   }
 
   @JsonProperty("position")
-  private EmploymentPosition position;
+  private PositionEnum position;
 
   @JsonProperty("workExperienceTotal")
   private Integer workExperienceTotal;
@@ -116,7 +110,7 @@ public class EmploymentDTO {
   @JsonProperty("workExperienceCurrent")
   private Integer workExperienceCurrent;
 
-  public EmploymentDTO employmentStatus(EmploymentStatus employmentStatus) {
+  public EmploymentDTO employmentStatus(EmploymentStatusEnum employmentStatus) {
     this.employmentStatus = employmentStatus;
     return this;
   }
@@ -125,13 +119,15 @@ public class EmploymentDTO {
    * Get employmentStatus
    * @return employmentStatus
   */
-  @NotNull 
-  @Schema(name = "employmentStatus", example = "EMPLOYED", requiredMode = Schema.RequiredMode.REQUIRED)
-  public EmploymentDTO.EmploymentStatus getEmploymentStatus() {
+  @ApiModelProperty(example = "EMPLOYED", required = true, value = "")
+  @NotNull
+
+
+  public EmploymentStatusEnum getEmploymentStatus() {
     return employmentStatus;
   }
 
-  public void setEmploymentStatus(EmploymentStatus employmentStatus) {
+  public void setEmploymentStatus(EmploymentStatusEnum employmentStatus) {
     this.employmentStatus = employmentStatus;
   }
 
@@ -144,8 +140,10 @@ public class EmploymentDTO {
    * Get employerINN
    * @return employerINN
   */
-  @NotNull 
-  @Schema(name = "employerINN", example = "12569845645", requiredMode = Schema.RequiredMode.REQUIRED)
+  @ApiModelProperty(example = "12569845645", required = true, value = "")
+  @NotNull
+
+
   public String getEmployerINN() {
     return employerINN;
   }
@@ -163,8 +161,11 @@ public class EmploymentDTO {
    * Get salary
    * @return salary
   */
-  @NotNull @Valid 
-  @Schema(name = "salary", example = "80000", requiredMode = Schema.RequiredMode.REQUIRED)
+  @ApiModelProperty(example = "80000", required = true, value = "")
+  @NotNull
+
+  @Valid
+
   public BigDecimal getSalary() {
     return salary;
   }
@@ -173,7 +174,7 @@ public class EmploymentDTO {
     this.salary = salary;
   }
 
-  public EmploymentDTO position(EmploymentPosition position) {
+  public EmploymentDTO position(PositionEnum position) {
     this.position = position;
     return this;
   }
@@ -182,13 +183,15 @@ public class EmploymentDTO {
    * Get position
    * @return position
   */
-  @NotNull 
-  @Schema(name = "position", example = "WORKER", requiredMode = Schema.RequiredMode.REQUIRED)
-  public EmploymentDTO.EmploymentPosition getPosition() {
+  @ApiModelProperty(example = "WORKER", required = true, value = "")
+  @NotNull
+
+
+  public PositionEnum getPosition() {
     return position;
   }
 
-  public void setPosition(EmploymentPosition position) {
+  public void setPosition(PositionEnum position) {
     this.position = position;
   }
 
@@ -201,8 +204,10 @@ public class EmploymentDTO {
    * Get workExperienceTotal
    * @return workExperienceTotal
   */
-  @NotNull 
-  @Schema(name = "workExperienceTotal", example = "12", requiredMode = Schema.RequiredMode.REQUIRED)
+  @ApiModelProperty(example = "12", required = true, value = "")
+  @NotNull
+
+
   public Integer getWorkExperienceTotal() {
     return workExperienceTotal;
   }
@@ -220,8 +225,10 @@ public class EmploymentDTO {
    * Get workExperienceCurrent
    * @return workExperienceCurrent
   */
-  @NotNull 
-  @Schema(name = "workExperienceCurrent", example = "12", requiredMode = Schema.RequiredMode.REQUIRED)
+  @ApiModelProperty(example = "12", required = true, value = "")
+  @NotNull
+
+
   public Integer getWorkExperienceCurrent() {
     return workExperienceCurrent;
   }
@@ -229,6 +236,7 @@ public class EmploymentDTO {
   public void setWorkExperienceCurrent(Integer workExperienceCurrent) {
     this.workExperienceCurrent = workExperienceCurrent;
   }
+
 
   @Override
   public boolean equals(Object o) {
@@ -256,6 +264,7 @@ public class EmploymentDTO {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class EmploymentDTO {\n");
+    
     sb.append("    employmentStatus: ").append(toIndentedString(employmentStatus)).append("\n");
     sb.append("    employerINN: ").append(toIndentedString(employerINN)).append("\n");
     sb.append("    salary: ").append(toIndentedString(salary)).append("\n");
