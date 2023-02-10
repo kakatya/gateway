@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.kakatya.gateway.dtos.FinishRegistrationRequestDto;
+import ru.kakatya.gateway.model.FinishRegistrationRequestDto;
 
 @FeignClient(name = "${service.deal.name}", url = "${service.deal.url}")
 public interface DealServiceFeignClient {

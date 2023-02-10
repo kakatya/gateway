@@ -4,9 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.kakatya.gateway.dtos.FinishRegistrationRequestDto;
-import ru.kakatya.gateway.dtos.LoanApplicationRequestDTO;
-import ru.kakatya.gateway.dtos.LoanOfferDTO;
+import ru.kakatya.gateway.model.FinishRegistrationRequestDto;
+import ru.kakatya.gateway.model.LoanApplicationRequestDTO;
+import ru.kakatya.gateway.model.LoanOfferDTO;
 import ru.kakatya.gateway.exceptions.PrescoringException;
 import ru.kakatya.gateway.exceptions.ScoringException;
 

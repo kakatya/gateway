@@ -175,7 +175,7 @@ components:
           example: 115
           format: int64
           type: integer
-        requestAmount:
+        requestedAmount:
           example: 120000
           type: number
         totalAmount:
@@ -201,7 +201,7 @@ components:
       - isSalaryClient
       - monthlyPayment
       - rate
-      - requestAmount
+      - requestedAmount
       - term
       - totalAmount
       type: object

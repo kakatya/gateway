@@ -4,24 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.NativeWebRequest;
-import ru.kakatya.gateway.dtos.FinishRegistrationRequestDto;
-import ru.kakatya.gateway.dtos.LoanApplicationRequestDTO;
-import ru.kakatya.gateway.dtos.LoanOfferDTO;
+import ru.kakatya.gateway.api.ApplicationApi;
+
+import ru.kakatya.gateway.api.DocumentApi;
+
+import ru.kakatya.gateway.model.FinishRegistrationRequestDto;
+import ru.kakatya.gateway.model.LoanApplicationRequestDTO;
+import ru.kakatya.gateway.model.LoanOfferDTO;
 import ru.kakatya.gateway.services.GatewayService;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 public class GatewayController implements ApplicationApi, DocumentApi {
     @Autowired
     private GatewayService gatewayService;
-
-
-    @Override
-    public Optional<NativeWebRequest> getRequest() {
-        return ApplicationApi.super.getRequest();
-    }
 
     @Override
     public ResponseEntity<Void> requestDocuments(Long applicationId) {
@@ -39,6 +36,12 @@ public class GatewayController implements ApplicationApi, DocumentApi {
     public ResponseEntity<Void> sendSesCode(Long applicationId, String sesCode) {
         gatewayService.signDocument(applicationId, sesCode);
         return ResponseEntity.ok().build();
+    }
+
+
+    @Override
+    public Optional<NativeWebRequest> getRequest() {
+        return ApplicationApi.super.getRequest();
     }
 
     @Override
